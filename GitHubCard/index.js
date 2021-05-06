@@ -15,7 +15,7 @@ axios.get(`https://api.github.com/users/joshuascan`);
 
     Skip to STEP 3.
 */
-console.log(axios.get(`https://api.github.com/users/joshuascan`));
+
 /*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
@@ -37,7 +37,7 @@ const followersArray = [];
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
     Using DOM methods and properties, create and return the following markup:
-
+    
     <div class="card">
       <img src={image url of user} />
       <div class="card-info">
@@ -53,6 +53,49 @@ const followersArray = [];
       </div>
     </div>
 */
+
+const cards = document.querySelector('.cards');
+
+function githubCardMaker(obj) {
+    const card = document.createElement('div');
+    const userImage = document.createElement('img');
+    const cardInfo = document.createElement('div');
+    const name = document.createElement('h3');
+    const username = document.createElement('p');
+    const location = document.createElement('p');
+    const profile = document.createElement('p');
+    const profileLink = document.createElement('a');
+    const followers = document.createElement('p');
+    const following = document.createElement('p');
+    const userBio = document.createElement('p');
+
+    card.appendChild(userImage);
+    card.appendChild(cardInfo);
+    cardInfo.appendChild(name);
+    cardInfo.appendChild(username);
+    cardInfo.appendChild(location);
+    cardInfo.appendChild(profile);
+    profile.appendChild(profileLink);
+    cardInfo.appendChild(followers);
+    cardInfo.appendChild(following);
+    cardInfo.appendChild(userBio);
+
+    card.classList.add('card');
+    cardInfo.classList.add('card-info');
+    name.classList.add('name');
+    username.classList.add('username');
+
+    userImage.src = obj.avatar_url;
+    name.textContent = obj.name;
+    username.textContent = obj.login;
+    location.textContent = `Location: ${obj.location}`;
+    profile.textContent = 'Profile:';
+    profileLink.href = obj.html_url;
+    profileLink.textContent = obj.html_url;
+    followers.textContent = `Followers: ${obj.followers}`;
+    following.textContent = `Following: ${obj.following}`;
+    userBio.textContent = `Bio: ${obj.bio}`;
+}
 
 /*
   List of LS Instructors Github username's:

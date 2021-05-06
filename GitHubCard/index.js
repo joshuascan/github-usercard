@@ -9,13 +9,15 @@ import axios from "axios";
 axios.get(`https://api.github.com/users/joshuascan`)
     .then((response) => {
         const data = response.data;
-        // data.forEach( data => {
-            // const profileCard = githubCardMaker(data);
-            cards.appendChild(githubCardMaker(data));
+        cards.appendChild(githubCardMaker(data));
     })
     .catch((err) => {
         console.log('Error: ', err);
     })
+    .finally(() => {
+        console.log('All done');
+    })
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -47,7 +49,13 @@ followersArray.forEach((name) => {
         .then((response) => {
             const data = response.data;
             cards.appendChild(githubCardMaker(data));
-        });
+        })
+        .catch((err) => {
+            console.log('Error: ', err);
+        })
+        .finally(() => {
+            console.log('All done');
+        })
 });
 
 /*
